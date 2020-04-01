@@ -43,7 +43,9 @@ cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory
 ```
 
 ### Installing Updates
-```sudo apt update && sudo apt dist-upgrade```
+```
+sudo apt update && sudo apt dist-upgrade
+```
 
 ### Disable Swap
 
@@ -54,7 +56,9 @@ sudo apt purge dphys-swapfile
 ```
 
 ### Rebooting
- ```sudo reboot```
+ ```
+ sudo reboot
+ ```
 
 ### Installing Docker
 ```
@@ -66,7 +70,9 @@ sudo usermod -aG docker jay
 ### Set Docker daemon options
 Edit the daemon.json file:
 
-```sudo vim /etc/docker/daemon.json```
+```
+sudo vim /etc/docker/daemon.json
+```
 
 ```
  {
@@ -79,25 +85,35 @@ Edit the daemon.json file:
  }
 ```
 
-##Enabling Routing<a name = "routing">
+## Enabling Routing
 Find ** /etc/sysctl.conf** and uncomment this line:
 
-```#net.ipv4.ip_forward=1```
+```
+#net.ipv4.ip_forward=1
+```
 
 ### Reboot again
 
-```sudo reboot```
+```
+sudo reboot
+```
 
 ### Adding the Kubernetes Repo
-```sudo vim /etc/apt/sources.list.d/kubernetes.list```
+```
+sudo vim /etc/apt/sources.list.d/kubernetes.list
+```
 
 Add:
 
-```deb http://apt.kubernetes.io/ kubernetes-xenial main```
+```
+deb http://apt.kubernetes.io/ kubernetes-xenial main
+```
 
 Adding the GPG Keys:
 
- ```curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - ```
+ ```
+ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - 
+ ```
 
 
 ###Installing all packages
@@ -139,7 +155,9 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 ### Checking pods
 Let's make sure the workers come up:
 
-```kubectl get pods --all-namespaces```
+```
+kubectl get pods --all-namespaces
+```
 
 ### Joining worker nodes
 You should have saved the **join** command from earlier, run this command on each worker node now. 
@@ -147,4 +165,6 @@ You should have saved the **join** command from earlier, run this command on eac
 ### Checking node status
 The final step is to validate if the worker nodes have successfully been joined to the master, run the following command until you see each node:
 
-```kubectl get nodes```
+```
+kubectl get nodes
+```
