@@ -49,8 +49,8 @@ cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory
 
 ```
 sudo dphys-swapfile swapoff
-| sudo dphys-swapfile uninstall
-| sudo apt purge dphys-swapfile
+sudo dphys-swapfile uninstall
+sudo apt purge dphys-swapfile
 ```
 
 ### Rebooting
@@ -82,7 +82,7 @@ Edit the daemon.json file:
 ##Enabling Routing<a name = "routing">
 Find ** /etc/sysctl.conf** and uncomment this line:
 
-```   #net.ipv4.ip_forward=1```
+```#net.ipv4.ip_forward=1```
 
 ### Reboot again
 
@@ -93,18 +93,18 @@ Find ** /etc/sysctl.conf** and uncomment this line:
 
 Add:
 
-``` deb http://apt.kubernetes.io/ kubernetes-xenial main```
+```deb http://apt.kubernetes.io/ kubernetes-xenial main```
 
 Adding the GPG Keys:
 
- ``` curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - ```
+ ```curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - ```
 
 
 ###Installing all packages
 
 ```
- sudo apt update
- sudo apt install kubeadm kubectl kubelet
+sudo apt update
+sudo apt install kubeadm kubectl kubelet
 ```
 
 ## Editing the Master<a name = "master">
@@ -114,16 +114,17 @@ Adding the GPG Keys:
 Run:
 
 ```
- sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 ```
 After this runs, you will be given a **join** command to add your worker machines to the cluster, save this somewhere else as we are not ready to add them just yet. 
 
 ### Setting the config director
 The previous command should have given you the following additional commands, run them all:
 
-``` mkdir -p ~.kube
- sudo cp /etc/kubernetes/admin.conf ~/.kube/config
- sudo chown $(id -u):$(id -g) $HOME/.kube/config
+``` 
+mkdir -p ~.kube
+sudo cp /etc/kubernetes/admin.conf ~/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
 If it recommends other commands, run those instead. 
@@ -132,7 +133,7 @@ If it recommends other commands, run those instead.
 Lets install the flannel netwrok driver:
 
 ```
- kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 ```
 
 ### Checking pods
@@ -146,4 +147,4 @@ You should have saved the **join** command from earlier, run this command on eac
 ### Checking node status
 The final step is to validate if the worker nodes have successfully been joined to the master, run the following command until you see each node:
 
-``` kubectl get nodes```
+```kubectl get nodes```
